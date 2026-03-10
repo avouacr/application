@@ -1,12 +1,8 @@
-FROM ubuntu:22.04
-
-# Install Python
-RUN apt-get -y update && \
-    apt-get install -y python3-pip
+FROM astral/uv:python3.12-bookworm-slim
 
 # Install project dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN uv add -r requirements.txt
 
 COPY src ./src
 COPY train.py .

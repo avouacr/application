@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import argparse
 from loguru import logger
-from joblib import dump
+import skops.io as sio
 
 import pathlib
 import pandas as pd
@@ -73,8 +73,7 @@ pipe = create_pipeline(
 
 pipe.fit(X_train, y_train)
 
-with open("model.joblib", "wb") as f:
-    dump(pipe, f)
+sio.dump(pipe, "model.skops")
 
 # Evaluate the model
 score, matrix = evaluate_model(pipe, X_test, y_test)

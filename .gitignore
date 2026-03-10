@@ -4,3 +4,5 @@ data/**/*.csv
 data/**/*.parquet
 titanic/
 model.joblib
+*.skops
+*.log

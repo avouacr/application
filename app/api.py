@@ -3,8 +3,12 @@ from fastapi import FastAPI
 from joblib import load
 
 import pandas as pd
+import skops.io as sio
 
-model = load('model.joblib')
+unknown_types = sio.get_untrusted_types(file="model.skops")
+# investigate the contents of unknown_types, and only load if you trust
+# everything you see.
+model = sio.load("model.skops", trusted=unknown_types)
 
 app = FastAPI(
     title="Prédiction de survie sur le Titanic",
@@ -46,6 +50,6 @@ async def predict(
         }
     )
 
-    prediction = "Survived 🎉" if int(model.predict(df)) == 1 else "Dead ⚰️"
+    prediction = "Survived 🎉" if int(model.predict(df)[0]) == 1 else "Dead ⚰️"
 
     return prediction
