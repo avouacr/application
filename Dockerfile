@@ -4,6 +4,7 @@ FROM astral/uv:python3.12-bookworm-slim
 COPY requirements.txt .
 RUN uv add -r requirements.txt
 
+COPY pyproject.toml .
 COPY src ./src
 COPY train.py .
 COPY app ./app
