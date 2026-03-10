@@ -1,4 +1,4 @@
-FROM astral/uv:python3.12-bookworm-slims
+FROM astral/uv:python3.12-bookworm-slim
 
 # Install project dependencies
 COPY requirements.txt .
